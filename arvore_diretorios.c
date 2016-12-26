@@ -19,15 +19,15 @@ TAN * aloca(int info){
 	return novo;
 }
 
-TAN * busca_n(TAN *a, int x){
+TAN * busca(TAN *a, int x){
 	if(a == NULL)
 		return NULL;
 	if(a -> info == x)
 		return a;
-	TAN *aux = busca_n(a -> filho, x);
+	TAN *aux = busca(a -> filho, x);
 	if(aux)
 		return aux;
-	return busca_n(a -> prox_irmao, x);
+	return busca(a -> prox_irmao, x);
 }
 
 void imprime(TAN *a){
@@ -43,6 +43,14 @@ void libera(TAN *a){
 	if(a -> filho)
 		libera(a -> filho);
 	free(a);
+}
+
+void deleta(TAN *a){
+	if(a){
+		if(a -> filho)
+			libera(a -> filho);
+		a -> filho = NULL;
+	}
 }
 
 int main(void){
@@ -65,7 +73,7 @@ int main(void){
 	scanf("%d", &n);
 	while(n > 0){
 		TAN *aux = NULL;
-		aux = busca_n(arvore, n);
+		aux = busca(arvore, n);
 		if(aux){
 			int i;
 			printf("Entre com um numero para a insercao: ");
@@ -85,8 +93,8 @@ int main(void){
 	printf("Entre com um numero para remocao: ");
 	scanf("%d", &n);
 	while(n > 0){
-		TAN *aux = busca_n(arvore, n);
-		libera(aux);
+		TAN *aux = busca(arvore, n);
+		deleta(aux);
 		printf("Entre com um numero para remocao: ");
 		scanf("%d", &n);
 	}
