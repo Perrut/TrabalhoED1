@@ -43,7 +43,7 @@ FILE * criarArquivo(char*nome, char tipo){
 		//le a string do usuario e limpa o buffer para poder receber string com espaço entre as palavras
 		scanf("%[^\n]s", conteudo);
 		setbuf(stdin, NULL);
-		fprintf(arq, conteudo);
+		fprintf(arq, "%s", conteudo);
 		return arq;
 	}
 	else{
@@ -54,7 +54,7 @@ FILE * criarArquivo(char*nome, char tipo){
 		scanf("%[^\n]s", conteudo);
 		setbuf(stdin, NULL);
 		//FAZER A ESCRITA DO ARQUIVO BINARIO USANDO FPRINT MESMO?
-		fprintf(arq, conteudo);
+		fprintf(arq, "%s", conteudo);
 		return arq;
 	}
 }
