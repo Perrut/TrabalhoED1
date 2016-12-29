@@ -3,8 +3,6 @@
 #include "TAN.h"
 #include <sys/stat.h>
 
-//FALTA TRANSFORMAR
-
 int main(void){
     TAN *RAIZ = aloca_dir("RAIZ");
     
@@ -27,7 +25,9 @@ int main(void){
     insere(pastafilho, arquivobinfilho);
     imprime(RAIZ);
     
-    renomear(arquivobinfilho2, "ptinha");
+    deleta(RAIZ, pastafilho);
+    printf("\n");
+    printf("\n");
     imprime(RAIZ);
     
     return 0;
