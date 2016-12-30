@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <time.h>
 //MODIFICAÇÕES NA STRUCT DIRETORIO
 //MODIFICAÇÃO NA LEITURA DA ENTRADA PADRÃO PARA INSERÇÃO NO ARQUIVO
 //MODIFICAÇÃO EM INSERIR
@@ -64,23 +66,79 @@ char* ler_texto() {
 
 FILE * criarArquivo(char*nome, char tipo){
 	FILE *arq;
+	char conteudo[1000];
 	if(tipo=='T'){
 		arq=fopen(nome,"wt");
 		printf("Insira o conteudo do arquivo: \n");
-        char*conteudo=ler_texto();
+		scanf("%s", conteudo);
+        //char*conteudo=ler_texto();
 		fprintf(arq, "%s", conteudo);
 		return arq;
 	}
 	else{
 		arq=fopen(nome,"wb");
 		printf("Insira o conteudo do arquivo: \n");
-        char*conteudo=ler_texto();
+		scanf("%s", conteudo);
+        //char*conteudo=ler_texto();
 		fprintf(arq, "%s", conteudo);
 		return arq;
 	}
 }
 
-void insere(TAN*pai, TAN*filho){
+TAN * buscaDiretorio(TAN *a, char *nome){
+     DIR *elem = a->info;
+     if(strcmp(elem -> nome, nome) == 0) return a;
+     TAN *p;
+     for(p = a -> filho; p; p = p->prox_irmao){
+        TAN *resp = buscaDiretorio(p,nome);
+        if(resp) return resp;
+     }
+     return NULL;
+}
+
+void atualizaDataHora(TAN *raiz, TAN *a){
+	TAN *aux = a;
+	TAN *aux2 = NULL;
+	if(aux -> tipo == 'D'){
+		DIR *d = aux -> info;
+		while(strcmp(d -> nomePai, "NULL") != 0){
+			aux2 = buscaDiretorio(raiz, d -> nomePai);
+			if(aux2){
+				time_t mytime;
+				mytime = time(NULL);
+				char *hc = (char*) malloc(30*sizeof(char));
+				strcpy(hc, ctime(&mytime));
+				aux2 -> ultimaModH = hc;
+				char *dc = (char*) malloc(30*sizeof(char));
+				strcpy(dc, ctime(&mytime));
+				aux2 -> ultimaModD = dc;
+				aux = aux2;
+				d = aux -> info;
+			} else break;
+		}
+	} else{
+		ARQ *d = aux -> info;
+		char *c = d -> nomePai;
+		while(strcmp(c, "NULL") != 0){
+			aux2 = buscaDiretorio(raiz, c);
+			if(aux2){
+				time_t mytime;
+				mytime = time(NULL);
+				char *hc = (char*) malloc(30*sizeof(char));
+				strcpy(hc, ctime(&mytime));
+				aux2 -> ultimaModH = hc;
+				char *dc = (char*) malloc(30*sizeof(char));
+				strcpy(dc, ctime(&mytime));
+				aux2 -> ultimaModD = dc;
+				aux = aux2;
+				DIR *dir = aux -> info;
+				c = dir -> nomePai;
+			} else break;
+		}
+	}
+}
+
+void insere(TAN *raiz, TAN *pai, TAN *filho){
     //arquivo nao pode ter filhos
     if(pai -> tipo != 'D'){
     	printf("ERRO: arquivo nao pode ter filhos!!!");
@@ -101,6 +159,7 @@ void insere(TAN*pai, TAN*filho){
     }
 	filho -> prox_irmao = pai -> filho;
 	pai -> filho = filho;
+	atualizaDataHora(raiz, filho);
 }
 
 TAN * aloca_arq(char *nome, char tipo){
@@ -111,10 +170,16 @@ TAN * aloca_arq(char *nome, char tipo){
 	aux -> nome = nome;
 	aux -> nomePai="NULL";
 	aux -> arqv = arq;
-	novo -> dataCriacao = __DATE__;
-	novo -> horaCriacao = __TIME__;
-	novo -> ultimaModD = __DATE__;
-	novo -> ultimaModH = __TIME__;
+	time_t mytime;
+	mytime = time(NULL);
+	novo -> horaCriacao = (char*) malloc(30*sizeof(char));
+	strcpy(novo -> horaCriacao, ctime(&mytime));
+	novo -> dataCriacao = (char*) malloc(30*sizeof(char));
+	strcpy(novo -> dataCriacao, ctime(&mytime));
+	novo -> ultimaModD = (char*) malloc(30*sizeof(char));
+	strcpy(novo -> ultimaModD, ctime(&mytime));
+	novo -> ultimaModH = (char*) malloc(30*sizeof(char));
+	strcpy(novo -> ultimaModH, ctime(&mytime));
 	novo -> info = aux;
 	novo -> tipo = tipo;
 	novo -> filho = novo -> prox_irmao = NULL;
@@ -127,10 +192,16 @@ TAN * aloca_dir(char *nome){
 	aux -> nome = nome;
 	aux -> nomePai="NULL";
 	novo -> info = aux;
-	novo -> dataCriacao = __DATE__;
-	novo -> horaCriacao = __TIME__;
-	novo -> ultimaModD = __DATE__;
-	novo -> ultimaModH = __TIME__;
+	time_t mytime;
+	mytime = time(NULL);
+	novo -> horaCriacao = (char*) malloc(30*sizeof(char));
+	strcpy(novo -> horaCriacao, ctime(&mytime));
+	novo -> dataCriacao = (char*) malloc(30*sizeof(char));
+	strcpy(novo -> dataCriacao, ctime(&mytime));
+	novo -> ultimaModD = (char*) malloc(30*sizeof(char));
+	strcpy(novo -> ultimaModD, ctime(&mytime));
+	novo -> ultimaModH = (char*) malloc(30*sizeof(char));
+	strcpy(novo -> ultimaModH, ctime(&mytime));
 	novo -> tipo = 'D';
 	novo -> filho = novo -> prox_irmao = NULL;
 	return novo;
@@ -138,39 +209,13 @@ TAN * aloca_dir(char *nome){
 
 TAN * buscaArquivo(TAN *a, char *nome){
      ARQ * elem=a->info;
-     if(elem->nome==nome) return a;
+     if(strcmp(elem->nome, nome) == 0) return a;
      TAN *p;
      for(p = a -> filho; p; p = p -> prox_irmao){
         TAN *resp = buscaArquivo(p,nome);
         if(resp) return resp;
      }
      return NULL;
-}
-
-TAN * buscaDiretorio(TAN *a, char *nome){
-     DIR *elem = a->info;
-     if(elem -> nome == nome) return a;
-     TAN *p;
-     for(p = a -> filho; p; p = p->prox_irmao){
-        TAN *resp = buscaDiretorio(p,nome);
-        if(resp) return resp;
-     }
-     return NULL;
-}
-
-void atualizaDataHora(TAN *raiz, TAN *a){
-	TAN *aux = a;
-	TAN *aux2 = NULL;
-	DIR *d = aux -> info;
-	while(strcmp(d -> nomePai, "NULL") != 0){
-		aux2 = buscaDiretorio(raiz, d -> nomePai);
-		if(aux2){
-			aux2 -> ultimaModD = __DATE__;
-			aux2 -> ultimaModH = __TIME__;
-			aux = aux2;
-			d = aux -> info;
-		} else break;
-	}
 }
 
 void renomear(TAN *raiz, TAN *a, char *novonome){
@@ -196,8 +241,14 @@ void renomear(TAN *raiz, TAN *a, char *novonome){
 		 rename(arq -> nome, novonome);
 		 arq -> nome = novonome;
      }
-     a -> ultimaModH = __TIME__;
-     a -> ultimaModD = __DATE__;
+     time_t mytime;
+	 mytime = time(NULL);
+	 char *hc = (char*) malloc(30*sizeof(char));
+	 strcpy(hc, ctime(&mytime));
+	 a -> ultimaModH = hc;
+	 char *dc = (char*) malloc(30*sizeof(char));
+	 strcpy(dc, ctime(&mytime));
+	 a -> ultimaModD = dc;
      atualizaDataHora(raiz, a);
 }
 
@@ -264,7 +315,15 @@ void libera(TAN *a){
 	if(a -> tipo != 'D'){
 		ARQ *aux = a -> info;
 		remove(aux -> nome);
+		free(aux -> nome);
+	} else{
+		DIR *d = a -> info;
+		free(d -> nome);
 	}
+	free(a -> dataCriacao);
+	free(a -> horaCriacao);
+	free(a -> ultimaModD);
+	free(a -> ultimaModH);
 	free(a);
 }
 
@@ -321,11 +380,11 @@ long calculaArquivos(TAN *a){
 void imprime(TAN *a){
 	if(a -> tipo == 'D'){
 		DIR *dir = a -> info;
-		printf("%c/%s/Diretorios: %ld/Arquivos: %ld/%s/%s/%s/%s/%s\n\n",a->tipo, dir -> nome, calculaPastas(a), calculaArquivos(a), dir->nomePai, a -> dataCriacao, a -> horaCriacao, a -> ultimaModD, a -> ultimaModH);
+		printf("%c/%s/%s/%s/%s\n",a->tipo, dir -> nome, dir->nomePai, a -> dataCriacao, a -> horaCriacao);
 	}
 	else{
 		ARQ *arq = a -> info;
-		printf("%c/%s/%s/%ld/%s/%s/%s/%s\n\n",a->tipo, arq -> nome,arq->nomePai,arq -> tamanho, a -> dataCriacao, a -> horaCriacao, a -> ultimaModD, a -> ultimaModH);
+		printf("%c/%s/%s/%ld/%s/%s\n",a->tipo, arq -> nome,arq->nomePai,arq -> tamanho, a -> dataCriacao, a -> horaCriacao);
 	}
 	TAN *p = a -> filho;
 	for(; p; p = p -> prox_irmao)
@@ -343,11 +402,21 @@ void deleta(TAN *raiz, TAN *a){
 				TAN *pivot = aux -> filho;
 				if(pivot == a){
 					aux -> filho = pivot -> prox_irmao;
+					free(d -> nome);
+					free(a -> dataCriacao);
+					free(a -> horaCriacao);
+					free(a -> ultimaModD);
+					free(a -> ultimaModH);
 					free(a);
 				} else{
 					while(pivot -> prox_irmao != a)
 						pivot = pivot -> prox_irmao;
 					pivot -> prox_irmao = pivot -> prox_irmao -> prox_irmao;
+					free(d -> nome);
+					free(a -> dataCriacao);
+					free(a -> horaCriacao);
+					free(a -> ultimaModD);
+					free(a -> ultimaModH);
 					free(a);
 				}
 			}
@@ -363,11 +432,21 @@ void deleta(TAN *raiz, TAN *a){
 
 				if(pivot == a){
 					aux -> filho = pivot -> prox_irmao;
+					free(arq -> nome);
+					free(a -> dataCriacao);
+					free(a -> horaCriacao);
+					free(a -> ultimaModD);
+					free(a -> ultimaModH);
 					free(a);
 				} else{
 					while(pivot -> prox_irmao != a)
 						pivot = pivot -> prox_irmao;
 					pivot -> prox_irmao = pivot -> prox_irmao -> prox_irmao;
+					free(arq -> nome);
+					free(a -> dataCriacao);
+					free(a -> horaCriacao);
+					free(a -> ultimaModD);
+					free(a -> ultimaModH);
 					free(a);
 				}
 			}
@@ -375,3 +454,39 @@ void deleta(TAN *raiz, TAN *a){
 	}
 }
 
+void imprime_mesmo_nivel(TAN *a){
+	if(a -> tipo == 'D'){
+		DIR *dir = a -> info;
+		if(strcmp(dir -> nomePai, "NULL") == 0){
+			printf("%c/%s/%s/%s/%s\n",a->tipo, dir -> nome, dir->nomePai, a -> dataCriacao, a -> horaCriacao);
+		}
+	}
+}
+
+void teste(TAN *a){
+	TAN *aux = a -> filho;
+	while(aux){
+		ARQ *ar = aux -> info;
+		printf("%s\n", ar -> nome);
+		aux = aux -> prox_irmao;
+	}
+}
+
+void exibe_informacoes(TAN *a){
+	if(a -> tipo == 'D'){
+		DIR *d = a -> info;
+		printf("Nome: %s\n", d -> nome);
+	} else{
+		ARQ *arq = a -> info;
+		printf("Nome: %s\n", arq -> nome);
+	}
+	if(a -> tipo == 'B')
+		printf("Tipo: Arquivo Binario\n");
+	else if(a -> tipo == 'T')
+		printf("Tipo: Arquivo Texto\n");
+	else
+		printf("Tipo: Diretorio\n");
+	printf("Criacao: %s %s\n", a -> dataCriacao, a -> horaCriacao);
+	if(a -> tipo == 'D') printf("Arquivos: %ld   Diretorios: %ld\n", calculaArquivos(a), calculaPastas(a));
+	printf("Ultima modificacao: %s %s\n", a -> ultimaModD, a -> ultimaModH);
+}
