@@ -11,27 +11,51 @@ void exibe_opcoes(){
 	printf("\n9 - Transformar\t10 - Impressao completa\n");
 }
 
+void exibe_selecionados(TAN *dir, TAN *arq){
+	if(dir && arq){
+		ARQ *a = arq -> info;
+		DIR *d = dir -> info;
+		printf("Diretorio selecionado: %s\tArquivo selecionado: %s %c\n", d -> nome, a -> nome, arq -> tipo);
+	} else if(dir){
+		DIR *d = dir -> info;
+		printf("Diretorio selecionado: %s\tNenhum arquivo selecionado!\n", d -> nome);
+	}
+	else{
+		ARQ *a = arq -> info;
+		printf("Nenhum diretorio selecionado!\tArquivo selecionado: %s %c\n", a -> nome, arq -> tipo);
+	}
+}
+
 int main(void){
     TAN *RAIZ = aloca_dir("RAIZ");
     int n = 1;
     char *nome = NULL, tipo;
+    char choice;
     char cleaner;
+    
+    TAN *dir_atual = RAIZ;
+    TAN *arq_atual = NULL;
     
     printf("\n");
     imprime_mesmo_nivel(RAIZ);
     printf("\n");
     exibe_opcoes();
-    
-    TAN *dir_atual = RAIZ;
-    TAN *arq_atual = NULL;
+    exibe_selecionados(dir_atual, arq_atual);
     
     printf("\nOpcao desejada: ");
     scanf("%d", &n);
     
     while(1){
     	switch(n){
-			case 1: 
-				exibe_informacoes(RAIZ);
+			case 1:
+				printf("Arquivo ou diretorio selecionado? (A/D) ");
+				scanf(" %c", &tipo);
+				if(tipo == 'A')
+					if(!arq_atual) printf("Nenhum arquivo selecionado!\n");
+					else exibe_informacoes(arq_atual);
+				else 
+					if(!dir_atual) printf("Nenhum diretorio selecionado!\n");
+					else exibe_informacoes(dir_atual); 
 				break;
 			
 			case 2:
@@ -60,7 +84,7 @@ int main(void){
 				if(busca){ 
 					arq_atual = busca;
 					exibe_informacoes(arq_atual);
-				}
+				} else printf("Arquivo nao encontrado!\n");
 				break;
 				
 			case 5:
@@ -71,7 +95,7 @@ int main(void){
 				if(buscaD){ 
 					dir_atual = buscaD;
 					exibe_informacoes(dir_atual);
-				}
+				} else printf("Diretorio nao encontrado!\n");
 				break;
 				
 			case 6:
@@ -84,27 +108,41 @@ int main(void){
 				if(tipo == 'D'){
 					rmv = buscaDiretorio(RAIZ, nome);
 					if(rmv){
+						if(rmv == RAIZ){
+							printf("Impossivel remover o diretorio RAIZ!\n");
+							break;
+						}
 						printf("Ao excluir um diretorio voce perdera todos os arquivos\nnele contidos, tem certeza? (s/n) ");
 						char resp;
 						scanf(" %c", &resp);
-						if(resp == 's') deleta(RAIZ, rmv);
-					}
+						if(resp == 's'){
+							if(rmv == dir_atual) dir_atual = NULL;
+							deleta(RAIZ, rmv);
+						}
+					} else printf("Diretorio nao encontrado!\n");
 				} else{
 					rmv = buscaArquivo(RAIZ, nome);
-					if(rmv) deleta(RAIZ, rmv);
+					if(rmv){
+						if(rmv == arq_atual) arq_atual = NULL;
+						deleta(RAIZ, rmv);
+					}
+					else printf("Arquivo nao encontrado!\n");
 				}
 				break;
 			
 			case 7:
 				printf("Arquivo atual ou diretorio atual? (A/D) ");
-				char choice;
 				scanf(" %c", &choice);
 				if(!arq_atual && choice != 'D'){
 					printf("Nenhum arquivo selecionado!\n");
 					break;
 				}
-				if(dir_atual == RAIZ){
+				if(dir_atual == RAIZ && choice == 'D'){
 					printf("Impossivel fazer alteracoes no diretorio RAIZ!!!\n");
+					break;
+				}
+				if(!dir_atual && choice == 'D'){
+					printf("Nenhum diretorio selecionado!\n");
 					break;
 				}
 				printf("Novo nome: ");
@@ -116,12 +154,8 @@ int main(void){
 						exibe_informacoes(arq_atual);
 					}
 				} else{
-					if(!dir_atual)
-						printf("Nenhum diretorio selecionado!\n");
-					else{
-						renomear(RAIZ, dir_atual, nome);
-						exibe_informacoes(dir_atual);
-					}
+					renomear(RAIZ, dir_atual, nome);
+					exibe_informacoes(dir_atual);
 				}
 				break;
 
@@ -131,6 +165,23 @@ int main(void){
 				if(choice == 'A'){
 					if(!arq_atual){
 						printf("Nenhum arquivo selecionado!\n");
+					} else{
+						printf("Diretorio destino: ");
+						nome = (char*) malloc(sizeof(char));
+						scanf(" %s", nome);
+						TAN *dest = buscaDiretorio(RAIZ, nome);
+						if(!dest) printf("Diretorio nao encontrado!\n");
+						else{
+							mover(RAIZ, dest, arq_atual);
+							imprime(dest);
+							printf("Movido com sucesso!\n");
+						}
+					}
+				} else{
+					if(!dir_atual){
+						printf("Nenhum diretorio selecionado!\n");
+					} else if(dir_atual == RAIZ){
+						printf("Impossivel fazer operacoes sobre a raiz!\n");
 					} else{
 						printf("Diretorio destino: ");
 						nome = (char*) malloc(sizeof(char));
@@ -155,7 +206,7 @@ int main(void){
 					} else{
 						transformar(RAIZ, arq_atual, 'D');
 						exibe_informacoes(arq_atual);
-						arq_atual == NULL;
+						arq_atual = NULL;
 					}
 				} else{
 					if(!dir_atual){
@@ -171,10 +222,14 @@ int main(void){
 							scanf(" %c", &tipo);
 							transformar(RAIZ, dir_atual, tipo);
 							exibe_informacoes(dir_atual);
-							dir_atual == NULL;
+							dir_atual = NULL;
 						}
 					}
 				}
+				break;
+			
+			case 10:
+				imprime(RAIZ);
 				break;
 				
 			case 13:
@@ -184,11 +239,18 @@ int main(void){
     	
     	if(!n) break;
     	
+    	exibe_selecionados(dir_atual, arq_atual);
     	printf("\nOpcao desejada (13 para exibir opcoes): ");
     	scanf("%d", &n);
     }
     
-    imprime(RAIZ);
+    TAN *del = RAIZ -> filho;
+    while(del){
+    	deleta(RAIZ, del);
+    	del = del -> prox_irmao;
+    }
+    //dar free nas outras coisas
+    //terminar de rever o mover
     
     return 0;
 }
