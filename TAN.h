@@ -87,7 +87,7 @@ FILE * criarArquivo(char*nome, char tipo){
 
 TAN * buscaDiretorio(TAN *a, char *nome){
      DIR *elem = a->info;
-     if(strcmp(elem -> nome, nome) == 0) return a;
+     if(strcmp(elem -> nome, nome) == 0 && a -> tipo == 'D') return a;
      TAN *p;
      for(p = a -> filho; p; p = p->prox_irmao){
         TAN *resp = buscaDiretorio(p,nome);
@@ -209,7 +209,7 @@ TAN * aloca_dir(char *nome){
 
 TAN * buscaArquivo(TAN *a, char *nome){
      ARQ * elem=a->info;
-     if(strcmp(elem->nome, nome) == 0) return a;
+     if(strcmp(elem->nome, nome) == 0 && a -> tipo != 'D') return a;
      TAN *p;
      for(p = a -> filho; p; p = p -> prox_irmao){
         TAN *resp = buscaArquivo(p,nome);
@@ -315,9 +315,11 @@ void libera(TAN *a){
 	if(a -> tipo != 'D'){
 		ARQ *aux = a -> info;
 		remove(aux -> nome);
+		free(aux -> nomePai);
 		free(aux -> nome);
 	} else{
 		DIR *d = a -> info;
+		free(d -> nomePai);
 		free(d -> nome);
 	}
 	free(a -> dataCriacao);
@@ -337,8 +339,24 @@ void transformar(TAN *raiz, TAN *obj, char tipo){
 		deleta_filhos(obj);
 		DIR *dir = obj -> info;
 		ARQ *arq = (ARQ*) malloc(sizeof(ARQ));
-		arq -> nome = dir -> nome;
+		arq -> nome = (char*) malloc(100*sizeof(char));
+		strcpy(arq -> nome, dir -> nome);
 		arq -> nomePai = dir -> nomePai;
+		free(dir -> nome);
+		free(obj -> horaCriacao);
+		free(obj -> dataCriacao);
+		free(obj -> ultimaModD);
+		free(obj -> ultimaModH);
+		time_t mytime;
+		mytime = time(NULL);
+		obj -> horaCriacao = (char*) malloc(30*sizeof(char));
+		strcpy(obj -> horaCriacao, ctime(&mytime));
+		obj -> dataCriacao = (char*) malloc(30*sizeof(char));
+		strcpy(obj -> dataCriacao, ctime(&mytime));
+		obj -> ultimaModD = (char*) malloc(30*sizeof(char));
+		strcpy(obj -> ultimaModD, ctime(&mytime));
+		obj -> ultimaModH = (char*) malloc(30*sizeof(char));
+		strcpy(obj -> ultimaModH, ctime(&mytime));
 		arq -> arqv = criarArquivo(arq -> nome, tipo);
 		arq -> tamanho = calcularTamanhoArquivo(arq -> arqv);
 		obj -> info = arq;
@@ -347,9 +365,25 @@ void transformar(TAN *raiz, TAN *obj, char tipo){
 	} else{
 		ARQ *arq = obj -> info;
 		DIR *dir = (DIR*) malloc(sizeof(DIR));
-		dir -> nome = arq -> nome;
+		dir -> nome = (char*) malloc(100*sizeof(char));
+		strcpy(dir -> nome, arq -> nome);
 		dir -> nomePai = arq -> nomePai;
 		remove(arq -> nome);
+		free(arq -> nome);
+		free(obj -> horaCriacao);
+		free(obj -> dataCriacao);
+		free(obj -> ultimaModD);
+		free(obj -> ultimaModH);
+		time_t mytime;
+		mytime = time(NULL);
+		obj -> horaCriacao = (char*) malloc(30*sizeof(char));
+		strcpy(obj -> horaCriacao, ctime(&mytime));
+		obj -> dataCriacao = (char*) malloc(30*sizeof(char));
+		strcpy(obj -> dataCriacao, ctime(&mytime));
+		obj -> ultimaModD = (char*) malloc(30*sizeof(char));
+		strcpy(obj -> ultimaModD, ctime(&mytime));
+		obj -> ultimaModH = (char*) malloc(30*sizeof(char));
+		strcpy(obj -> ultimaModH, ctime(&mytime));
 		obj -> info = dir;
 		obj -> tipo = tipo;
 		free(arq);
@@ -407,6 +441,7 @@ void deleta(TAN *raiz, TAN *a){
 					free(a -> horaCriacao);
 					free(a -> ultimaModD);
 					free(a -> ultimaModH);
+					d -> nomePai = NULL;
 					free(a);
 				} else{
 					while(pivot -> prox_irmao != a)
@@ -417,6 +452,7 @@ void deleta(TAN *raiz, TAN *a){
 					free(a -> horaCriacao);
 					free(a -> ultimaModD);
 					free(a -> ultimaModH);
+					d -> nomePai = NULL;
 					free(a);
 				}
 			}
@@ -437,6 +473,7 @@ void deleta(TAN *raiz, TAN *a){
 					free(a -> horaCriacao);
 					free(a -> ultimaModD);
 					free(a -> ultimaModH);
+					arq -> nomePai = NULL;
 					free(a);
 				} else{
 					while(pivot -> prox_irmao != a)
@@ -447,6 +484,7 @@ void deleta(TAN *raiz, TAN *a){
 					free(a -> horaCriacao);
 					free(a -> ultimaModD);
 					free(a -> ultimaModH);
+					arq -> nomePai = NULL;
 					free(a);
 				}
 			}
