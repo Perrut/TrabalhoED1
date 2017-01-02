@@ -42,18 +42,20 @@ FILE * criarArquivo(char*nome, char tipo){
 	char conteudo[5000];
 	if(tipo=='T'){
 		arq=fopen(nome,"wt");
+		//criando arquivo com nome selecionado como parametro do metodo
 		printf("Insira o conteudo do arquivo: \n");
 		scanf(" %[^\n]s", conteudo);
-        //char*conteudo=ler_texto();
+		//capturando conteudo
 		fprintf(arq, "%s", conteudo);
+		//escrevendo no arquivo
 		return arq;
 	}
 	else{
 		arq=fopen(nome,"wb");
 		printf("Insira o conteudo do arquivo: \n");
 		scanf(" %[^\n]s", conteudo);
-        //char*conteudo=ler_texto();
 		fprintf(arq, "%s", conteudo);
+		//escrevendo no arquivo binario com fprint apenas para fins de representatividade
 		return arq;
 	}
 }
@@ -61,6 +63,7 @@ FILE * criarArquivo(char*nome, char tipo){
 TAN * buscaDiretorio(TAN *a, char *nome){
      DIR *elem = a->info;
      if(strcmp(elem -> nome, nome) == 0 && a -> tipo == 'D') return a;
+     // se o diretorio a ser buscado tem o mesmo nome do nó passado como parametro,o nó é retornado
      TAN *p;
      for(p = a -> filho; p; p = p->prox_irmao){
         TAN *resp = buscaDiretorio(p,nome);
@@ -70,6 +73,7 @@ TAN * buscaDiretorio(TAN *a, char *nome){
 }
 
 int e_filho(TAN *a1, TAN *a2){
+    //verifica se a2 é um filho de a1
 	if(a1 == a2)
 		return 1;
 	TAN *p;
@@ -133,10 +137,12 @@ void insere(TAN *raiz, TAN *pai, TAN *filho){
     }
 	filho -> prox_irmao = pai -> filho;
 	pai -> filho = filho;
+	//ao fazer inserção, deve-se atualizar os dados de modificação da raiz
 	atualizaDataHora(raiz, filho);
 }
 
 TAN * aloca_arq(char *nome, char tipo){
+    //criando arquivo e setando o horario e data de criação
 	TAN *novo = (TAN*) malloc(sizeof(TAN));
 	ARQ *aux = (ARQ*) malloc(sizeof(ARQ));
 	FILE *arq = criarArquivo(nome,tipo);
@@ -157,6 +163,7 @@ TAN * aloca_arq(char *nome, char tipo){
 }
 
 TAN * aloca_dir(char *nome){
+    //criando diretorio de setando o horario e data de criação
 	TAN *novo = (TAN*) malloc(sizeof(TAN));
 	DIR *aux = (DIR*) malloc(sizeof(DIR));
 	aux -> nome = nome;
@@ -176,6 +183,7 @@ TAN * aloca_dir(char *nome){
 TAN * buscaArquivoTipo(TAN *a, char *nome, char tipo){
      ARQ * elem=a->info;
      if(strcmp(elem->nome, nome) == 0 && a -> tipo == tipo) return a;
+     //retorna o nó "a" se o nome escolhido como parametro tiver o mesmo nome do nó passado como parametro
      TAN *p;
      for(p = a -> filho; p; p = p -> prox_irmao){
         TAN *resp = buscaArquivoTipo(p,nome,tipo);
@@ -187,6 +195,7 @@ TAN * buscaArquivoTipo(TAN *a, char *nome, char tipo){
 TAN * buscaArquivo(TAN *a, char *nome){
      ARQ * elem=a->info;
      if(strcmp(elem->nome, nome) == 0 && a -> tipo != 'D') return a;
+     //retorna o nó "a" se o nome escolhido como parametro tiver o mesmo nome do nó passado como parametro
      TAN *p;
      for(p = a -> filho; p; p = p -> prox_irmao){
         TAN *resp = buscaArquivo(p,nome);
@@ -196,7 +205,7 @@ TAN * buscaArquivo(TAN *a, char *nome){
 }
 
 void renomear(TAN *raiz, TAN *a, char *novonome){
-    //AO RENOMEAR O NÓ, DEVE-SE PASSAR O NOVO NOME AOS SEUS FILHOS
+    //AO RENOMEAR O NÓ, SENDO UM ARQUIVO, DEVE-SE PASSAR O NOVO NOME AOS SEUS FILHOS
      if(a -> tipo == 'D'){
 		 DIR *dir = a -> info;
 		 dir -> nome = novonome;
@@ -218,6 +227,7 @@ void renomear(TAN *raiz, TAN *a, char *novonome){
 		 rename(arq -> nome, novonome);
 		 arq -> nome = novonome;
      }
+     //atualizando data e hora de modificação
      time_t mytime;
 	 mytime = time(NULL);
 	 char *dc = (char*) malloc(30*sizeof(char));
@@ -235,10 +245,8 @@ void mover(TAN *raiz, TAN *destino, TAN *movido){
     }
     if(movido -> tipo == 'D'){
     	DIR *d = movido -> info;
-
     	//pai do movido
     	TAN *aux = buscaDiretorio(raiz, d -> nomePai);
-
     	if(aux){
     		atualizaDataHora(raiz, movido);
     		TAN *pivot = aux -> filho;
@@ -249,7 +257,6 @@ void mover(TAN *raiz, TAN *destino, TAN *movido){
     			}
     			pivot -> prox_irmao = pivot -> prox_irmao -> prox_irmao;
     		}
-
     		movido -> prox_irmao = destino -> filho;
     		destino -> filho = movido;
     		DIR *dest = destino -> info;
@@ -258,10 +265,8 @@ void mover(TAN *raiz, TAN *destino, TAN *movido){
     	}
     } else{
     	ARQ *a = movido -> info;
-
     	//pai do movido
     	TAN *aux = buscaDiretorio(raiz, a -> nomePai);
-
     	if(aux){
     		atualizaDataHora(raiz, movido);
     		TAN *pivot = aux -> filho;
@@ -306,6 +311,7 @@ void deleta_filhos(TAN *a){
 
 void transformar(TAN *raiz, TAN *obj, char tipo){
 	if(obj -> tipo == 'D'){
+        //ao transformar um diretorio, deleta-se os filhos
 		deleta_filhos(obj);
 		DIR *dir = obj -> info;
 		ARQ *arq = (ARQ*) malloc(sizeof(ARQ));
