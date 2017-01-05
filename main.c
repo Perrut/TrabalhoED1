@@ -27,13 +27,106 @@ void exibe_selecionados(TAN *dir, TAN *arq){
 	}
 }
 
-int main(void){
+int main(int argv, char **argc){
+    if(argv < 2){
+		printf("Arquivo nao informado!\n");
+		return 0;
+	}
+	FILE *a = fopen(argc[1], "r");
+	
+	TAN *RAIZ = NULL;
+	
+	char tipo;
+	char campo1[100];//nome
+	char campo2[100];//nomePai
+	char campo3[100];//tamanho(B ou T) OU data(D)
+	char campo4[100];//data(B ou T) OU hora(D)
+	char campo5[100];//hora(B ou T)
+	
+	char c = ' ';
+	int atual = 0;
+	int cursor = 0;
+	while(fscanf(a, "%c", &c) != EOF){
+		if(c == '\n'){
+			if(!atual)break;
+			if(tipo == 'D'){
+				campo4[cursor] = '\0';
+				if(strcmp(campo2, "NULL") == 0){
+					RAIZ = aloca_dir_texto(tipo, campo1, campo2, campo3, campo4);	
+				}else{
+					TAN *aux = buscaDiretorio(RAIZ, campo2);
+					if(aux){
+						TAN *aux2 = aloca_dir_texto(tipo, campo1, campo2, campo3, campo4);
+						insere(RAIZ, aux, aux2);
+						aux2 = NULL;
+					}
+					aux = NULL;
+				}
+			} else{
+				TAN *aux = buscaDiretorio(RAIZ, campo2);
+				if(aux){
+					TAN *aux2 = aloca_arq_texto(tipo, campo1, campo2, campo3, campo4, campo5);
+					insere(RAIZ, aux, aux2);
+					aux2 = NULL;
+				}
+				aux = NULL;
+			}
+			campo5[cursor] = '\0';
+			atual = 0;
+			cursor = 0;
+		}
+		else if(c == '/'){
+			atual++;
+			if(atual == 2){
+				campo1[cursor] = '\0';
+			}
+			else if(atual == 3){
+				campo2[cursor] = '\0';
+			}
+			else if(atual == 4){
+				campo3[cursor] = '\0';
+			}
+			else if(atual == 5){
+				campo4[cursor] = '\0';
+			}
+			else if(atual == 6){
+				campo5[cursor] = '\0';
+			}
+			cursor = 0;
+		}
+		else if(atual == 0){
+			tipo = c;
+		}
+		else if(atual == 1){
+			campo1[cursor] = c;
+			cursor++;
+		}
+		else if(atual == 2){
+			campo2[cursor] = c;
+			cursor++;
+		}
+		else if(atual == 3){
+			campo3[cursor] = c;
+			cursor++;
+		}
+		else if(atual == 4){
+			campo4[cursor] = c;
+			cursor++;
+		}
+		else if(atual == 5){
+			campo5[cursor] = c;
+			cursor++;
+		}
+		c = ' ';
+	}
+	
+	fclose(a);
+    
     //o diretorio atual começa como RAIZ, que nunca pode ser modificada
     //o arquivo atual começa como nulo, uma vez que nao foi criado ainda
-    TAN *RAIZ = aloca_dir("RAIZ");
     TAN *busca = NULL;
     int n = 1;
-    char *nome = NULL, tipo;
+    char *nome = NULL;
     char choice;
 
     TAN *dir_atual = RAIZ;
