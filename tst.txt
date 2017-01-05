@@ -1,0 +1,148 @@
+D/Stan Wawrinka/NULL/Nov 21 2016/10:25:45
+D/Kei Nishikori/Stan Wawrinka/Nov 21 2016/10:25:45
+D/Rafael Nadal/Stan Wawrinka/Nov 21 2016/10:25:45
+D/Dominic Thiem/Kei Nishikori/Nov 21 2016/10:25:45
+D/Tomas Berdych/Kei Nishikori/Nov 21 2016/10:25:45
+D/Jo-Wilfried Tsonga/Tomas Berdych/Nov 21 2016/10:25:45
+D/Nick Kyrgios/Stan Wawrinka/Nov 21 2016/10:25:45
+D/Roger Federer/Kei Nishikori/Nov 21 2016/10:25:45
+D/Grigor Dimitrov/Rafael Nadal/Nov 21 2016/10:25:45
+D/Pablo Cuevas/Jo-Wilfried Tsonga/Nov 21 2016/10:25:45
+D/Jack Sock/Kei Nishikori/Nov 21 2016/10:25:45
+D/Alexander Zverev/Roger Federer/Nov 21 2016/10:25:45
+D/Gilles Simon/Roger Federer/Nov 21 2016/10:25:45
+D/Bernard Tomic/Jack Sock/Nov 21 2016/10:25:45
+D/Feliciano Lopez/Dominic Thiem/Nov 21 2016/10:25:45
+D/Pablo Carreno Busta/Roger Federer/Nov 21 2016/10:25:45
+D/Sam Querrey/Nick Kyrgios/Nov 21 2016/10:25:45
+D/Philipp Kohlschreiber/Dominic Thiem/Nov 21 2016/10:25:45
+D/Martin Klizan/Stan Wawrinka/Nov 21 2016/10:25:45
+D/Marcel Granollers/Philipp Kohlschreiber/Nov 21 2016/10:25:45
+D/Juan Martin del Potro/Grigor Dimitrov/Nov 21 2016/10:25:45
+D/Nicolas Mahut/Rafael Nadal/Nov 21 2016/10:25:45
+D/Federico Delbonis/Juan Martin del Potro/Nov 21 2016/10:25:45
+D/Fernando Verdasco/Pablo Cuevas/Nov 21 2016/10:25:45
+D/Joao Sousa/Dominic Thiem/Nov 21 2016/10:25:45
+D/Nicolas Almagro/Federico Delbonis/Nov 21 2016/10:25:45
+D/Benoit Paire/Rafael Nadal/Nov 21 2016/10:25:45
+D/Borna Coric/Tomas Berdych/Nov 21 2016/10:25:45
+D/Mischa Zverev/Kei Nishikori/Nov 21 2016/10:25:45
+D/Diego Schwartzman/Jack Sock/Nov 21 2016/10:25:45
+D/Adrian Mannarino/Roger Federer/Nov 21 2016/10:25:45
+D/Robin Haase/Tomas Berdych/Nov 21 2016/10:25:45
+D/Thomaz Bellucci/Nicolas Almagro/Nov 21 2016/10:25:45
+D/Jan-Lennard Struff/Pablo Carreno Busta/Nov 21 2016/10:25:45
+D/Facundo Bagnis/Alexander Zverev/Nov 21 2016/10:25:45
+D/Kevin Anderson/Pablo Carreno Busta/Nov 21 2016/10:25:45
+D/Paul-Henri Mathieu/Diego Schwartzman/Nov 21 2016/10:25:45
+D/Jeremy Chardy/Facundo Bagnis/Nov 21 2016/10:25:45
+D/Guillermo Garcia-Lopez/Joao Sousa/Nov 21 2016/10:25:45
+D/Konstantin Kravchuk/Grigor Dimitrov/Nov 21 2016/10:25:45
+D/Pierre-Hugues Herbert/Borna Coric/Nov 21 2016/10:25:45
+D/Horacio Zeballos/Jeremy Chardy/Nov 21 2016/10:25:45
+D/Jordan Thompson/Jack Sock/Nov 21 2016/10:25:45
+D/Renzo Olivo/Jeremy Chardy/Nov 21 2016/10:25:45
+D/Gastao Elias/Juan Martin del Potro/Nov 21 2016/10:25:45
+D/Thiago Monteiro/Federico Delbonis/Nov 21 2016/10:25:45
+D/Steve Darcis/Borna Coric/Nov 21 2016/10:25:45
+D/Carlos Berlocq/Guillermo Garcia-Lopez/Nov 21 2016/10:25:45
+D/Andreas Seppi/Paul-Henri Mathieu/Nov 21 2016/10:25:45
+D/Donald Young/Federico Delbonis/Nov 21 2016/10:25:45
+D/Dusan Lajovic/Carlos Berlocq/Nov 21 2016/10:25:45
+D/Nikoloz Basilashvili/Thomaz Bellucci/Nov 21 2016/10:25:45
+D/Radu Albot/Federico Delbonis/Nov 21 2016/10:25:45
+D/Taro Daniel/Renzo Olivo/Nov 21 2016/10:25:45
+D/Joao Souza/Jeremy Chardy/Nov 21 2016/10:25:45
+D/Daniel Dutra da Silva/Guillermo Garcia-Lopez/Nov 21 2016/10:25:45
+D/Jose Pereira/Daniel Dutra da Silva/Nov 21 2016/10:25:45
+D/Bruno Santanna/Joao Souza/Nov 21 2016/10:25:45
+D/Pedro Sakamoto/Donald Young/Nov 21 2016/10:25:45
+D/Fernando Romboli/Philipp Kohlschreiber/Nov 21 2016/10:25:45
+D/Orlando Luz/Thomaz Bellucci/Nov 21 2016/10:25:45
+D/Joao Menezes/Robin Haase/Nov 21 2016/10:25:45
+D/Nicolas Santos/Nick Kyrgios/Nov 21 2016/10:25:45
+D/Carlos Eduardo Severino/Benoit Paire/Nov 21 2016/10:25:45
+D/Fabiano De Paula/Paul-Henri Mathieu/Nov 21 2016/10:25:45
+D/Alex Blumenberg/Jose Pereira/Nov 21 2016/10:25:45
+D/Alexandre Tsuchiya/Diego Schwartzman/Nov 21 2016/10:25:45
+D/Leonardo Telles/Andreas Seppi/Nov 21 2016/10:25:45
+D/Augusto Laranja/Fernando Romboli/Nov 21 2016/10:25:45
+D/Rafael Camilo/Donald Young/Nov 21 2016/10:25:45
+D/Guilherme Osorio/Jose Pereira/Nov 21 2016/10:25:45
+D/Gustavo Guerses/Dusan Lajovic/Nov 21 2016/10:25:45
+D/Asdrubal Gobernate/Taro Daniel/Nov 21 2016/10:25:45
+D/Antonioni Fasano/Kei Nishikori/Nov 21 2016/10:25:45
+D/Marvin Bernardo Spiering /Alex Blumenberg/Nov 21 2016/10:25:45
+D/Eduardo Ribeiro/Konstantin Kravchuk/Nov 21 2016/10:25:45
+B/Andy Murray/Kevin Anderson/528/Nov 21 2016/10:25:45
+T/Novak Djokovic/Joao Souza/3912/Nov 21 2016/10:25:45
+B/Milos Raonic/Dusan Lajovic/5464/Nov 21 2016/10:25:45
+T/Gael Monfils/Pablo Carreno Busta/7336/Nov 21 2016/10:25:45
+B/Marin Cilic/Alex Blumenberg/7128/Nov 21 2016/10:25:45
+T/David Goffin/Horacio Zeballos/1120/Nov 21 2016/10:25:45
+B/Roberto Bautista Agut/Facundo Bagnis/7920/Nov 21 2016/10:25:45
+T/Lucas Pouille/Sam Querrey/3576/Nov 21 2016/10:25:45
+B/Richard Gasquet/Fernando Verdasco/4120/Nov 21 2016/10:25:45
+T/John Isner/Alexandre Tsuchiya/3520/Nov 21 2016/10:25:45
+B/Ivo Karlovic/Kevin Anderson/6456/Nov 21 2016/10:25:45
+T/David Ferrer/Borna Coric/1696/Nov 21 2016/10:25:45
+B/Albert Ramos-Vinolas/Eduardo Ribeiro/1232/Nov 21 2016/10:25:45
+T/Viktor Troicki/Carlos Berlocq/4936/Nov 21 2016/10:25:45
+B/Steve Johnson/Stan Wawrinka/8/Nov 21 2016/10:25:45
+T/Gilles Muller/Pedro Sakamoto/5824/Nov 21 2016/10:25:45
+B/Marcos Baghdatis/Joao Sousa/3344/Nov 21 2016/10:25:45
+T/Paolo Lorenzi/Nikoloz Basilashvili/5448/Nov 21 2016/10:25:45
+B/Kyle Edmund/Pablo Carreno Busta/6696/Nov 21 2016/10:25:45
+T/Andrey Kuznetsov/Taro Daniel/6632/Nov 21 2016/10:25:45
+B/Fabio Fognini/Roger Federer/656/Nov 21 2016/10:25:45
+T/Florian Mayer/Pedro Sakamoto/5040/Nov 21 2016/10:25:45
+B/Karen Khachanov/Sam Querrey/1712/Nov 21 2016/10:25:45
+T/Stephane Robert/Nick Kyrgios/3112/Nov 21 2016/10:25:45
+B/Jiri Vesely/Asdrubal Gobernate/7584/Nov 21 2016/10:25:45
+T/Mikhail Youzhny/Diego Schwartzman/2160/Nov 21 2016/10:25:45
+B/Malek Jaziri/Radu Albot/2280/Nov 21 2016/10:25:45
+T/Daniel Evans/Fernando Romboli/6272/Nov 21 2016/10:25:45
+B/Guido Pella/Thomaz Bellucci/2264/Nov 21 2016/10:25:45
+T/Yen-Hsun Lu/Feliciano Lopez/96/Nov 21 2016/10:25:45
+B/Dustin Brown/Feliciano Lopez/7872/Nov 21 2016/10:25:45
+T/Illya Marchenko/Martin Klizan/6560/Nov 21 2016/10:25:45
+B/Juan Monaco/Jack Sock/3192/Nov 21 2016/10:25:45
+T/John Millman/Thiago Monteiro/1416/Nov 21 2016/10:25:45
+B/Taylor Fritz/Nicolas Santos/1264/Nov 21 2016/10:25:45
+T/Gerald Melzer/Eduardo Ribeiro/2064/Nov 21 2016/10:25:45
+B/Ricardas Berankis/Philipp Kohlschreiber/816/Nov 21 2016/10:25:45
+T/Damir Dzumhur/Sam Querrey/5080/Nov 21 2016/10:25:45
+B/Inigo Cervantes/Radu Albot/6360/Nov 21 2016/10:25:45
+T/Adam Pavlasek/Radu Albot/6024/Nov 21 2016/10:25:45
+B/Dudi Sela/Dusan Lajovic/5072/Nov 21 2016/10:25:45
+T/Ryan Harrison/Tomas Berdych/4792/Nov 21 2016/10:25:45
+B/Mikhail Kukushkin/Philipp Kohlschreiber/2552/Nov 21 2016/10:25:45
+T/Santiago Giraldo/Taro Daniel/944/Nov 21 2016/10:25:45
+B/Yoshihito Nishioka/Bruno Santanna/4216/Nov 21 2016/10:25:45
+T/Rogerio Dutra Silva/Jordan Thompson/4704/Nov 21 2016/10:25:45
+B/Guilherme Clezar/Nicolas Almagro/5624/Nov 21 2016/10:25:45
+T/Andre Ghem/Jack Sock/1296/Nov 21 2016/10:25:45
+B/Caio Zampieri/Paul-Henri Mathieu/6888/Nov 21 2016/10:25:45
+T/Joao Pedro Sorgi/Joao Menezes/4456/Nov 21 2016/10:25:45
+B/Ricardo Hocevar/Jose Pereira/2536/Nov 21 2016/10:25:45
+T/Marcelo Zormann/Jack Sock/4232/Nov 21 2016/10:25:45
+B/Oscar Jose Gutierrez /Fernando Verdasco/4712/Nov 21 2016/10:25:45
+T/Thales Turini/Konstantin Kravchuk/3448/Nov 21 2016/10:25:45
+B/Fabricio Neis/Marcel Granollers/2968/Nov 21 2016/10:25:45
+T/Andre Miele/Diego Schwartzman/3576/Nov 21 2016/10:25:45
+B/Igor Marcondes/Paul-Henri Mathieu/3104/Nov 21 2016/10:25:45
+T/Caio Silva/Nicolas Mahut/632/Nov 21 2016/10:25:45
+B/Wilson Leite/Mischa Zverev/2032/Nov 21 2016/10:25:45
+T/Eduardo Dischinger/Nikoloz Basilashvili/5416/Nov 21 2016/10:25:45
+B/Tiago Lopes/Konstantin Kravchuk/5832/Nov 21 2016/10:25:45
+T/Rafael Matos/Joao Souza/7560/Nov 21 2016/10:25:45
+B/Fernando Yamacita/Kevin Anderson/7528/Nov 21 2016/10:25:45
+T/Marcelo Demoliner/Joao Sousa/3688/Nov 21 2016/10:25:45
+B/Filipe Brandao/Konstantin Kravchuk/5296/Nov 21 2016/10:25:45
+T/Jordan Correia/Adrian Mannarino/4848/Nov 21 2016/10:25:45
+B/Pedro Bernardi/Marvin Bernardo Spiering /1208/Nov 21 2016/10:25:45
+T/Lourenzo Gasperini/Dusan Lajovic/2752/Nov 21 2016/10:25:45
+B/Gustavo De Oliveira Cruz/Horacio Zeballos/4184/Nov 21 2016/10:25:45
+T/Luis Britto/Carlos Eduardo Severino/120/Nov 21 2016/10:25:45
+B/Eduardo Russi Assumpcao/Juan Martin del Potro/5144/Nov 21 2016/10:25:45
+
