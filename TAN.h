@@ -7,7 +7,7 @@ typedef struct arquivo{
 	char *nome;
 	char *nomePai;
 	FILE *arqv;
-	long tamanho;
+	char *tamanho;
 } ARQ;
 
 typedef struct diretorio{
@@ -19,7 +19,9 @@ typedef struct arvore{
 	void *info;
 	char tipo;
 	char *dataCriacao;
+	char *horaCriacao;
 	char *ultimaModD;
+	char *ultimaModH;
 	struct arvore *filho;
 	struct arvore *prox_irmao;
 } TAN;
@@ -146,7 +148,8 @@ TAN * aloca_arq(char *nome, char tipo){
 	TAN *novo = (TAN*) malloc(sizeof(TAN));
 	ARQ *aux = (ARQ*) malloc(sizeof(ARQ));
 	FILE *arq = criarArquivo(nome,tipo);
-	aux -> tamanho = calcularTamanhoArquivo(arq);
+	aux -> tamanho = (char*) malloc(100*sizeof(char));
+	aux -> tamanho = "asdasda";
 	aux -> nome = nome;
 	aux -> nomePai="NULL";
 	aux -> arqv = arq;
@@ -157,6 +160,55 @@ TAN * aloca_arq(char *nome, char tipo){
 	novo -> ultimaModD = (char*) malloc(30*sizeof(char));
 	strcpy(novo -> ultimaModD, ctime(&mytime));
 	novo -> info = aux;
+	novo -> tipo = tipo;
+	novo -> filho = novo -> prox_irmao = NULL;
+	return novo;
+}
+
+TAN * aloca_arq_texto(char tipo, char *nome, char *nomePai, char *tamanho, char *data, char *hora){
+    //criando arquivo a partir da entrada textual
+	TAN *novo = (TAN*) malloc(sizeof(TAN));
+	ARQ *aux = (ARQ*) malloc(sizeof(ARQ));
+	FILE *arq = fopen(nome, "w+");
+	fclose(arq);
+	aux -> tamanho = (char*) malloc(100*sizeof(char));
+	aux -> tamanho = strcpy(aux -> tamanho, tamanho);
+	aux -> nome = (char*) malloc(100*sizeof(char));
+	aux -> nomePai = (char*) malloc(100*sizeof(char));
+	aux -> nome = strcpy(aux -> nome, nome);
+	aux -> nomePai = strcpy(aux -> nomePai, nomePai);
+	aux -> arqv = arq;
+	novo -> dataCriacao = (char*) malloc(100*sizeof(char));
+	novo -> dataCriacao = strcpy(novo -> dataCriacao, data);
+	novo -> horaCriacao = (char*) malloc(100*sizeof(char));
+	novo -> horaCriacao = strcpy(novo -> horaCriacao, hora);
+	novo -> ultimaModD = (char*) malloc(100*sizeof(char));
+	novo -> ultimaModD = strcpy(novo -> ultimaModD, data);
+	novo -> ultimaModH = (char*) malloc(100*sizeof(char));
+	novo -> ultimaModH = strcpy(novo -> ultimaModH, hora);
+	novo -> info = aux;
+	novo -> tipo = tipo;
+	novo -> filho = novo -> prox_irmao = NULL;
+	return novo;
+}
+
+TAN * aloca_dir_texto(char tipo, char *nome, char *nomePai, char *data, char *hora){
+    //criando diretorio de setando o horario e data de criação
+	TAN *novo = (TAN*) malloc(sizeof(TAN));
+	DIR *aux = (DIR*) malloc(sizeof(DIR));
+	aux -> nome =  (char*) malloc(100*sizeof(char));
+	aux -> nome = strcpy(aux -> nome, nome);
+	aux -> nomePai =  (char*) malloc(100*sizeof(char));
+	aux -> nomePai= strcpy(aux -> nomePai, nomePai);
+	novo -> info = aux;
+	novo -> dataCriacao = (char*) malloc(100*sizeof(char));
+	novo -> dataCriacao = strcpy(novo -> dataCriacao, data);
+	novo -> horaCriacao = (char*) malloc(100*sizeof(char));
+	novo -> horaCriacao = strcpy(novo -> horaCriacao, hora);
+	novo -> ultimaModD = (char*) malloc(100*sizeof(char));
+	novo -> ultimaModD = strcpy(novo -> ultimaModD, data);
+	novo -> ultimaModH = (char*) malloc(100*sizeof(char));
+	novo -> ultimaModH = strcpy(novo -> ultimaModH, hora);
 	novo -> tipo = tipo;
 	novo -> filho = novo -> prox_irmao = NULL;
 	return novo;
@@ -328,7 +380,8 @@ void transformar(TAN *raiz, TAN *obj, char tipo){
 		obj -> ultimaModD = (char*) malloc(30*sizeof(char));
 		strcpy(obj -> ultimaModD, ctime(&mytime));
 		arq -> arqv = criarArquivo(arq -> nome, tipo);
-		arq -> tamanho = calcularTamanhoArquivo(arq -> arqv);
+		arq -> tamanho = (char*) malloc(100*sizeof(char));
+		arq -> tamanho = "1231232";
 		obj -> info = arq;
 		obj -> tipo = tipo;
 		free(dir);
@@ -378,11 +431,11 @@ long calculaArquivos(TAN *a){
 void imprime(TAN *a){
 	if(a -> tipo == 'D'){
 		DIR *dir = a -> info;
-		printf("%c/%s/%s/%s",a->tipo, dir -> nome, dir->nomePai, a -> dataCriacao);
+		printf("%c/%s/%s/%s\n",a->tipo, dir -> nome, dir->nomePai, a -> dataCriacao);
 	}
 	else{
 		ARQ *arq = a -> info;
-		printf("%c/%s/%s/%ld/%s",a->tipo, arq -> nome,arq->nomePai,arq -> tamanho, a -> dataCriacao);
+		printf("%c/%s/%s/%s/%s\n",a->tipo, arq -> nome,arq->nomePai,arq -> tamanho, a -> dataCriacao);
 	}
 	TAN *p = a -> filho;
 	for(; p; p = p -> prox_irmao)
