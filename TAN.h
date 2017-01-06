@@ -607,6 +607,7 @@ void exibe_informacoes(TAN *a){
 	} else{
 		ARQ *arq = a -> info;
 		printf("Nome: %s\n", arq -> nome);
+		printf("Tamanho: %s\n", arq -> tamanho);
 	}
 	if(a -> tipo == 'B')
 		printf("Tipo: Arquivo Binario\n");
