@@ -533,6 +533,21 @@ void imprime(TAN *a){
 		imprime(p);
 }
 
+void imprime_mesmo_nivel(TAN *a){
+	a = a -> filho;
+	while(a){
+		if(a -> tipo == 'D'){
+			DIR *dir = a -> info;
+			printf("%c/%s/%s/%s/%s\n",a->tipo, dir -> nome, dir->nomePai, a -> dataCriacao, a -> horaCriacao);
+		}
+		else{
+			ARQ *arq = a -> info;
+			printf("%c/%s/%s/%s/%s/%s\n",a->tipo, arq -> nome,arq->nomePai,arq -> tamanho, a -> dataCriacao, a -> horaCriacao);
+		}
+		a = a -> prox_irmao;
+	}
+}
+
 void deleta(TAN *raiz, TAN *a){
 	if(a){
 		atualizaDataHora(raiz, a);
