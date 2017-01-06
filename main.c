@@ -5,7 +5,7 @@
 
 void exibe_opcoes(){
     //painel de opções que serão desviadas para o fluxo do switch
-	printf("1 - Exibe informacoes\t2 - Inserir arquivo\n3 - Inserir diretorio\t4 - Buscar arquivo\n5 - Buscar diretorio\t6 - Excluir\n7 - Renomear\t8 - Mover\n9 - Transformar\t10 - Impressao completa\n");
+	printf("1 - Exibe informacoes\t2 - Inserir arquivo\n3 - Inserir diretorio\t4 - Buscar arquivo\n5 - Buscar diretorio\t6 - Excluir\n7 - Renomear\t8 - Mover\n9 - Transformar\t10 - Impressao completa\n11 - Impressao de nivel\n");
 }
 
 void exibe_selecionados(TAN *dir, TAN *arq){
@@ -138,7 +138,7 @@ int main(int argv, char **argc){
     exibe_opcoes();
     printf("\n");
     exibe_selecionados(dir_atual, arq_atual);
-    printf("Opcao desejada  (11 para exibir opcoes, 0 para sair): ");
+    printf("Opcao desejada  (12 para exibir opcoes, 0 para sair): ");
     scanf("%d", &n);
 
     while(1){
@@ -537,6 +537,11 @@ int main(int argv, char **argc){
 				break;
 
 			case 11:
+				if(dir_atual) imprime_mesmo_nivel(dir_atual);
+				else imprime_mesmo_nivel(RAIZ);
+				break;
+			
+			case 12:
 				exibe_opcoes();
 				break;
     	}
@@ -544,7 +549,7 @@ int main(int argv, char **argc){
     	if(!n) break;
     	printf("\n");
     	exibe_selecionados(dir_atual, arq_atual);
-    	printf("Opcao desejada (11 para exibir opcoes, 0 para sair): ");
+    	printf("Opcao desejada (12 para exibir opcoes, 0 para sair): ");
     	scanf("%d", &n);
     }
     //saindo do loop, limpa a memoria
